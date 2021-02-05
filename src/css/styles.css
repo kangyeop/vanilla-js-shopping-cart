@@ -27,6 +27,7 @@ body {
 
     position: sticky;
     top: 0;
+    z-index: 1;
 
     background-color: rgb(231, 226, 221);
 }
@@ -43,7 +44,7 @@ body {
     padding: 0px 1.5rem;
 }
 
-i {
+.header-container i {
     font-size: 1.5rem;
     font-weight: 600;
     cursor: pointer;
@@ -65,5 +66,30 @@ i {
     border-radius: 30%;
 }
 
-/* .logo {
-} */
+#ad-section {
+    position: relative;
+
+    width: 100%;
+    min-height: calc(100vh - 60px);
+
+    background: url(../images/ad-background.jpeg) center/cover no-repeat;
+}
+
+.banner-div {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+
+    padding: 2rem;
+
+    text-align: center;
+
+    background: rgba(255, 255, 255, 0.8);
+}
+
+.banner-text {
+    font-size: 3.4rem;
+    text-transform: uppercase;
+    letter-spacing: var(--mainSpacing);
+}
