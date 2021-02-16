@@ -1,5 +1,6 @@
 import Header from "./header";
 import ADsection from "./ad";
+import ProductSection from "./products";
 
 export default class App {
     constructor(app) {
@@ -8,5 +9,8 @@ export default class App {
 
         const adSection = new ADsection(app);
         this.adSection = adSection;
+
+        const productSection = new ProductSection(app);
+        this.productSection = productSection;
     }
 }

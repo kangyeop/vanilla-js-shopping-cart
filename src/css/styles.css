@@ -93,3 +93,25 @@ body {
     text-transform: uppercase;
     letter-spacing: var(--mainSpacing);
 }
+
+.product-title {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 5rem;
+    text-transform: capitalize;
+    letter-spacing: var(--mainSpacing);
+}
+
+#products-section {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+
+.product-card {
+    width: 15rem;
+}
+
+.product-img {
+    width: 15rem;
+}
