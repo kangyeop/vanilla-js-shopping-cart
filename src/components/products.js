@@ -19,7 +19,7 @@ export default class ProductSection {
         productSection.appendChild(productTitle);
 
         const productContent = document.createElement("div");
-        productContent.className = "product-content";
+        productContent.className = "product-card-list";
         this.productContent = productContent;
 
         productSection.appendChild(productContent);
