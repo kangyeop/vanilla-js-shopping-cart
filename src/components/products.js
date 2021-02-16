@@ -8,7 +8,22 @@ export default class ProductSection {
         const productSection = document.createElement("section");
         productSection.id = "products-section";
 
-        this.productSection = productSection;
+        const productTitle = document.createElement("div");
+        productTitle.className = "product-title";
+
+        const titleH2 = document.createElement("h2");
+        titleH2.textContent = "Our Product";
+
+        productTitle.appendChild(titleH2);
+
+        productSection.appendChild(productTitle);
+
+        const productContent = document.createElement("div");
+        productContent.className = "product-content";
+        this.productContent = productContent;
+
+        productSection.appendChild(productContent);
+
         app.appendChild(productSection);
     }
 
@@ -31,7 +46,7 @@ export default class ProductSection {
         if (images) {
             images.forEach((data) => {
                 new PhotoCard(
-                    this.productSection,
+                    this.productContent,
                     data.src.portrait,
                     data.photographer,
                     data.id
