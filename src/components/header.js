@@ -1,7 +1,7 @@
 import Logo from "../images/logo.svg";
 
 export default class Header {
-    constructor(app) {
+    constructor(app, onClickCart) {
         const header = document.createElement("header");
         header.className = "header";
 
@@ -16,6 +16,7 @@ export default class Header {
 
         const cartIconContainer = document.createElement("div");
         cartIconContainer.className = "cart-icon-container";
+        cartIconContainer.addEventListener("click", onClickCart);
 
         const cartCount = document.createElement("div");
         cartCount.textContent = "1";
