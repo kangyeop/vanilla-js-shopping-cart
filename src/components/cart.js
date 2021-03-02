@@ -29,9 +29,11 @@ export default class CartSection {
 
         const items = JSON.parse(itemsJson);
 
-        items.forEache(({ image, title, price }) => {
-            new CartItem(cartContent, image, title, price);
-        });
+        if (items) {
+            items.forEach(({ image, title, price }) => {
+                new CartItem(cartContent, image, title, price);
+            });
+        }
 
         cartSection.appendChild(closeButton);
         cartSection.appendChild(cartTitle);
