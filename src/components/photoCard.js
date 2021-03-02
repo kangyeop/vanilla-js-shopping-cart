@@ -1,3 +1,5 @@
+import { numberWithCommas } from "../utils";
+
 export default class PhotoCard {
     constructor(app, url, title, price) {
         const card = document.createElement("article");
@@ -24,7 +26,7 @@ export default class PhotoCard {
         titleSpan.textContent = title;
 
         const priceSpan = document.createElement("h4");
-        priceSpan.textContent = price;
+        priceSpan.textContent = `₩${numberWithCommas(price)}`;
 
         content.appendChild(titleSpan);
         content.appendChild(priceSpan);

@@ -1,3 +1,5 @@
+import CartItem from "./cartItem";
+
 export default class CartSection {
     constructor(app, onClickOverlay) {
         const overlay = document.createElement("div");
@@ -12,6 +14,9 @@ export default class CartSection {
         closeButton.className = "close-cart";
         closeButton.addEventListener("click", onClickOverlay);
 
+        const cartTitle = document.createElement("h2");
+        cartTitle.textContent = "your cart";
+
         const closeLetter = document.createElement("i");
         closeLetter.className = "fas fa-window-close";
 
@@ -20,8 +25,18 @@ export default class CartSection {
 
         closeButton.appendChild(closeLetter);
 
+        const itemsJson = localStorage.getItem("cartItmes");
+
+        const items = JSON.parse(itemsJson);
+
+        items.forEache(({ image, title, price }) => {
+            new CartItem(cartContent, image, title, price);
+        });
+
         cartSection.appendChild(closeButton);
+        cartSection.appendChild(cartTitle);
         cartSection.appendChild(cartContent);
+
         overlay.appendChild(cartSection);
         app.appendChild(overlay);
     }
