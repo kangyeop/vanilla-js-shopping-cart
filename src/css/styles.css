@@ -249,3 +249,31 @@ body {
     grid-column-gap: 1.5rem;
     margin: 1.5rem 0;
 }
+
+.cart-item img {
+    width: 75px;
+    height: 75px;
+}
+
+.cart-item h4 {
+    font-size: 0.85rem;
+    text-transform: capitalize;
+    letter-spacing: var(--mainSpacing);
+}
+
+.cart-item h5 {
+    margin: 0.5rem 0;
+    letter-spacing: var(--mainSpacing);
+}
+
+.cart-item-remove {
+    color: grey;
+    cursor: pointer;
+}
+
+.cart-section h2 {
+    text-transform: capitalize;
+    text-align: center;
+    letter-spacing: var(--mainSpacing);
+    margin-bottom: 2rem;
+}
