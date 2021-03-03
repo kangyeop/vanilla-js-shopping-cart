@@ -1,4 +1,5 @@
 import { numberWithCommas } from "../utils";
+import { setHeaderCount } from "../lib";
 
 export default class cartItem {
     constructor(app, imageSrc, name, price) {
@@ -14,6 +15,8 @@ export default class cartItem {
             const btn = document.querySelector(`#cart-button-${id}`);
             btn.textContent = "add to cart";
             btn.disabled = false;
+
+            setHeaderCount();
         };
 
         const cartContainer = document.createElement("article");

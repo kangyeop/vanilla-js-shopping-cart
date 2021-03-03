@@ -19,8 +19,15 @@ export default class Header {
         cartIconContainer.addEventListener("click", onClickCart);
 
         const cartCount = document.createElement("div");
-        cartCount.textContent = "1";
+
+        const ids = JSON.parse(localStorage.getItem("cartIds"));
+
+        cartCount.textContent = ids.length;
         cartCount.className = "cart-count-box";
+
+        if (!ids.length) {
+            cartCount.classList.add("hidden");
+        }
 
         const cartIcon = document.createElement("i");
         cartIcon.className = "fas fa-cart-plus";

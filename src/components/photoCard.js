@@ -1,5 +1,5 @@
 import { numberWithCommas } from "../utils";
-
+import { setHeaderCount } from "../lib";
 export default class PhotoCard {
     constructor(app, image, title, price, isCart, onClickCart) {
         const setCart = (price) => {
@@ -15,6 +15,7 @@ export default class PhotoCard {
             this.btn.disabled = true;
 
             onClickCart();
+            setHeaderCount();
         };
 
         const card = document.createElement("article");
