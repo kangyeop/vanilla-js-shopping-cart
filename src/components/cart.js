@@ -22,18 +22,9 @@ export default class CartSection {
 
         const cartContent = document.createElement("div");
         cartContent.className = "cart-content";
+        this.cartContent = cartContent;
 
         closeButton.appendChild(closeLetter);
-
-        const itemsJson = localStorage.getItem("cartItmes");
-
-        const items = JSON.parse(itemsJson);
-
-        if (items) {
-            items.forEach(({ image, title, price }) => {
-                new CartItem(cartContent, image, title, price);
-            });
-        }
 
         cartSection.appendChild(closeButton);
         cartSection.appendChild(cartTitle);
@@ -47,9 +38,37 @@ export default class CartSection {
         if (isShow) {
             this.overlay.classList.remove("hidden");
             this.cartSection.classList.add("show-cart");
+            this.render();
         } else {
             this.overlay.classList.add("hidden");
             this.cartSection.classList.remove("show-cart");
+        }
+    }
+
+    render() {
+        const idsJson = localStorage.getItem("cartIds");
+        const dataJson = localStorage.getItem("data");
+
+        const ids = JSON.parse(idsJson);
+        const data = JSON.parse(dataJson);
+
+        if (ids) {
+            ids.forEach((id) => {
+                const cartElement = document.querySelector(`#id-${id}`);
+
+                if (cartElement !== null) {
+                    return;
+                }
+
+                const res = data.find((item) => item.id === id);
+
+                new CartItem(
+                    this.cartContent,
+                    res.src.portrait,
+                    res.photographer,
+                    id
+                );
+            });
         }
     }
 }

@@ -1,22 +1,40 @@
 import { numberWithCommas } from "../utils";
 
 export default class PhotoCard {
-    constructor(app, url, title, price) {
+    constructor(app, image, title, price, isCart, onClickCart) {
+        const setCart = (price) => {
+            const ids = JSON.parse(localStorage.getItem("cartIds"));
+            const index = ids.indexOf(price);
+            if (index !== -1) {
+                return;
+            }
+            ids.push(price);
+            localStorage.setItem("cartIds", JSON.stringify(ids));
+
+            this.btn.textContent = "In Cart";
+            this.btn.disabled = true;
+
+            onClickCart();
+        };
+
         const card = document.createElement("article");
         card.className = "product-card";
 
         const imageDiv = document.createElement("div");
         imageDiv.className = "img-container";
 
-        const image = document.createElement("img");
-        image.src = url;
-        image.className = "product-img";
+        const imageTag = document.createElement("img");
+        imageTag.src = image;
+        imageTag.className = "product-img";
 
         const btn = document.createElement("button");
         btn.className = "img-btn";
-        btn.textContent = "Add In Cart";
+        btn.id = `cart-button-${price}`;
+        btn.textContent = isCart ? "In Cart" : "Add In Cart";
+        btn.disabled = isCart ? true : false;
+        this.btn = btn;
 
-        imageDiv.appendChild(image);
+        imageDiv.appendChild(imageTag);
         imageDiv.appendChild(btn);
 
         const content = document.createElement("div");
@@ -27,6 +45,10 @@ export default class PhotoCard {
 
         const priceSpan = document.createElement("h4");
         priceSpan.textContent = `₩${numberWithCommas(price)}`;
+
+        this.btn.addEventListener("click", () => {
+            setCart(price);
+        });
 
         content.appendChild(titleSpan);
         content.appendChild(priceSpan);
