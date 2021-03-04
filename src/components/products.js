@@ -2,7 +2,9 @@ import PhotoCard from "./photoCard";
 import { getImages } from "../api";
 
 export default class ProductSection {
-    constructor(app) {
+    constructor(app, carts, onClickCart) {
+        this.onClickCart = onClickCart;
+        this.carts = carts;
         this.data = [];
         this.init();
         const productSection = document.createElement("section");
@@ -31,11 +33,12 @@ export default class ProductSection {
         const {
             data: { photos },
         } = await getImages("FURNITURE");
-        console.log(photos);
+
         this.setState(photos);
     }
 
     setState(data) {
+        localStorage.setItem("data", JSON.stringify(data));
         this.data = data;
         this.render();
     }
@@ -49,7 +52,9 @@ export default class ProductSection {
                     this.productContent,
                     data.src.portrait,
                     data.photographer,
-                    data.id
+                    data.id,
+                    this.carts.indexOf(data.id) === -1 ? false : true,
+                    this.onClickCart
                 );
             });
         }
