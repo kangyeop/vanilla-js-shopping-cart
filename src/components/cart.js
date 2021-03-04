@@ -1,7 +1,20 @@
 import CartItem from "./cartItem";
+import { numberWithCommas } from "../utils";
 
 export default class CartSection {
     constructor(app, onClickOverlay) {
+        const cartClear = () => {
+            localStorage.setItem("cartIds", "[]");
+            while (this.cartContent.firstChild) {
+                const id = this.cartContent.lastChild.id.split("-")[1];
+                const btn = document.querySelector(`#cart-button-${id}`);
+                btn.textContent = "Add In Cart";
+                btn.disabled = false;
+                this.cartContent.removeChild(this.cartContent.lastChild);
+            }
+            this.render();
+        };
+
         const overlay = document.createElement("div");
         overlay.className = "cart-overlay hidden";
         this.overlay = overlay;
@@ -24,11 +37,33 @@ export default class CartSection {
         cartContent.className = "cart-content";
         this.cartContent = cartContent;
 
+        const cartFooter = document.createElement("div");
+        cartFooter.className = "cart-footer";
+
+        const totalPriceH3 = document.createElement("h3");
+        totalPriceH3.textContent = "Your Total : ₩";
+
+        const totalPrice = document.createElement("span");
+        totalPrice.id = "total-price";
+        totalPrice.textContent = "0";
+        this.totalPrice = totalPrice;
+
+        const clearButton = document.createElement("button");
+        clearButton.className = "banner-btn";
+        clearButton.textContent = "CLEAR CART";
+
+        clearButton.addEventListener("click", cartClear);
+
+        totalPriceH3.appendChild(totalPrice);
+        cartFooter.appendChild(totalPriceH3);
+        cartFooter.appendChild(clearButton);
+
         closeButton.appendChild(closeLetter);
 
         cartSection.appendChild(closeButton);
         cartSection.appendChild(cartTitle);
         cartSection.appendChild(cartContent);
+        cartSection.appendChild(cartFooter);
 
         overlay.appendChild(cartSection);
         app.appendChild(overlay);
@@ -53,14 +88,16 @@ export default class CartSection {
         const data = JSON.parse(dataJson);
 
         if (ids) {
+            let count = 0;
             ids.forEach((id) => {
                 const cartElement = document.querySelector(`#id-${id}`);
+
+                const res = data.find((item) => item.id === id);
+                count += res.id;
 
                 if (cartElement !== null) {
                     return;
                 }
-
-                const res = data.find((item) => item.id === id);
 
                 new CartItem(
                     this.cartContent,
@@ -69,6 +106,8 @@ export default class CartSection {
                     id
                 );
             });
+
+            this.totalPrice.textContent = numberWithCommas(count);
         }
     }
 }

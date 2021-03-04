@@ -38,6 +38,7 @@ export default class App {
             this.ids = ids;
         } else {
             this.ids = [];
+            localStorage.setItem("cartIds", "[]");
         }
     }
 }

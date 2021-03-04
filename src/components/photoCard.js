@@ -4,7 +4,7 @@ export default class PhotoCard {
     constructor(app, image, title, price, isCart, onClickCart) {
         const setCart = (price) => {
             const ids = JSON.parse(localStorage.getItem("cartIds"));
-            const index = ids.indexOf(price);
+            const index = ids?.indexOf(price);
             if (index !== -1) {
                 return;
             }

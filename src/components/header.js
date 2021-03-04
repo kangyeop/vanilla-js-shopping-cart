@@ -22,10 +22,10 @@ export default class Header {
 
         const ids = JSON.parse(localStorage.getItem("cartIds"));
 
-        cartCount.textContent = ids.length;
+        cartCount.textContent = ids?.length;
         cartCount.className = "cart-count-box";
 
-        if (!ids.length) {
+        if (!ids?.length) {
             cartCount.classList.add("hidden");
         }
 
